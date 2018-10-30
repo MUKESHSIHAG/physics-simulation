@@ -11,10 +11,19 @@ def addVectors((angle1, length1), (angle2, length2)):
 
     return (angle, length)
 
+def combine(p1, p2):
+    if math.hypot(p1.x - p2.x, p1.y - p2.y) < p1.size + p2.size:
+        total_mass = p1.mass + p2.mass
+        p1.x = (p1.x*p1.mass + p2.x*p2.mass)/total_mass
+        p1.y = (p1.y*p1.mass + p2.y*p2.mass)/total_mass
+        (p1.angle, p1.speed) = addVectors((p1.angle, p1.speed*p1.mass/total_mass), (p2.angle, p2.speed*p2.mass/total_mass))
+        p1.speed *= (p1.elasticity*p2.elasticity)
+        p1.mass += p2.mass
+        p1.collide_with = p2
+
 def collide(p1, p2):
     """ Tests whether two particles overlap
-        If they do, make them bounce
-        i.e. update their angle, speed and position """
+        If they do, make them bounce, i.e. update their angle, speed and position """
     
     dx = p1.x - p2.x
     dy = p1.y - p2.y
@@ -58,12 +67,7 @@ class Particle:
         self.y -= math.cos(self.angle) * self.speed
 
     def experienceDrag(self):
-        """ Slow particle down through drag """
         self.speed *= self.drag
-        
-    def accelerate(self, vector):
-        """ Change angle and speed by a given vector """
-        (self.angle, self.speed) = addVectors((self.angle, self.speed), vector)
 
     def mouseMove(self, (x, y)):
         """ Change angle and speed to move towards a given point """
@@ -72,6 +76,25 @@ class Particle:
         dy = y - self.y
         self.angle = 0.5*math.pi + math.atan2(dy, dx)
         self.speed = math.hypot(dx, dy) * 0.1
+        
+    def accelerate(self, vector):
+        """ Change angle and speed by a given vector """
+        (self.angle, self.speed) = addVectors((self.angle, self.speed), vector)
+        
+    def attract(self, other):
+        """" Change velocity based on gravatational attraction between two particle"""
+        
+        dx = (self.x - other.x)
+        dy = (self.y - other.y)
+        dist  = math.hypot(dx, dy)
+        
+        if dist < self.size + other.size:
+            return True
+
+        theta = math.atan2(dy, dx)
+        force = 0.2 * self.mass * other.mass / dist**2
+        self.accelerate((theta- 0.5 * math.pi, force/self.mass))
+        other.accelerate((theta+ 0.5 * math.pi, force/other.mass))
 
 class Environment:
     """ Defines the boundary of a simulation and its properties """
@@ -93,11 +116,11 @@ class Environment:
         'drag': (1, lambda p: p.experienceDrag()),
         'bounce': (1, lambda p: self.bounce(p)),
         'accelerate': (1, lambda p: p.accelerate(self.acceleration)),
-        'collide': (2, lambda p1, p2: collide(p1, p2))}
+        'collide': (2, lambda p1, p2: collide(p1, p2)),
+        'combine': (2, lambda p1, p2: combine(p1, p2)),
+        'attract': (2, lambda p1, p2: p1.attract(p2))}
         
     def addFunctions(self, function_list):
-        """ Look up functions names in dictionary and add to particle function lists """
-        
         for func in function_list:
             (n, f) = self.function_dict.get(func, (-1, None))
             if n == 1:
@@ -125,7 +148,7 @@ class Environment:
             self.particles.append(particle)
 
     def update(self):
-        """  Calls particle functions """
+        """  Moves particles and tests for collisions with the walls and each other """
         
         for i, particle in enumerate(self.particles):
             for f in self.particle_functions1:
