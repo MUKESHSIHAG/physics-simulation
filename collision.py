@@ -87,7 +87,7 @@ class Particle():
             self.speed *= elasticity
 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Tutorial 8')
+pygame.display.set_caption('Collisons')
 
 number_of_particles = 5
 my_particles = []
