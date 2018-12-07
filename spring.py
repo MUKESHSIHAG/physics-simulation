@@ -13,7 +13,7 @@ universe.addFunctions(['move', 'bounce', 'collide', 'drag', 'accelerate'])
 universe.acceleration = (pi, 0.01)
 universe.mass_of_air = 0.02
 
-for p in range(3):
+for p in range(4):
     universe.addParticles(mass=100, size=16, speed=2, elasticity=1, colour=(20,40,200))
     #universe.addParticles(mass=40, size=10, speed=1, elasticity=1, colour=(20,200,40)
 
