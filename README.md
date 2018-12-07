@@ -34,4 +34,5 @@ in space and provides ability to zoom-in and zoom-out**
 You can call its function by passing arguments using name of function 
 
              **Referred to example programs to see how to call the function in PyParticle module**
+Licensed under [MIT License](LICENSE).             
 
