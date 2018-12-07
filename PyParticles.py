@@ -206,7 +206,7 @@ class Environment:
             particle.angle = math.pi - particle.angle
             particle.speed *= self.elasticity
 
-    def findParticle(self, x, y):
+    def findParticle(self, (x, y)):
         """ Returns any particle that occupies position x, y """
         
         for particle in self.particles:
