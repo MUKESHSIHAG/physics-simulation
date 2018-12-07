@@ -62,5 +62,4 @@ while running:
         
     for s in universe.springs:
         pygame.draw.aaline(screen, (0,0,0), (int(s.p1.x), int(s.p1.y)), (int(s.p2.x), int(s.p2.y)))
-
-pygame.display.flip()
+    pygame.display.flip()
