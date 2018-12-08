@@ -1,3 +1,4 @@
+tic=60
 def getMousePos():
     p = pygame.mouse.get_pos()
     return [
@@ -59,6 +60,14 @@ def tick():
         if event.type == pygame.KEYDOWN:
             if event.key not in main.KEYSDOWN:
                 main.KEYSDOWN.append(event.key)
+            if event.key == pygame.K_DOWN:
+                global tic
+                tic*=1.5
+                print(tic)
+            if event.key == pygame.K_UP:
+                global tic
+                tic*=0.7
+                print(tic)  
     
     if main.TICKS % 1 == 0:
         main.DROPS.append(raindrop([random.randint(0, main.WIDTH), 0], [0, random.randint(2, 10)], random.randint(2, 5)))
@@ -82,7 +91,7 @@ def render():
     pygame.display.flip()
 
 def run():
-    ticksPerSecond = 60
+    ticksPerSecond = tic
     lastTime = time.time() * 1000000000
     nsPerTick =  1000000000.0 / float(ticksPerSecond)
     
@@ -94,6 +103,7 @@ def run():
     
     while True:
         now = time.time() * 1000000000
+        nsPerTick =  1000000000.0 / float(tic) 
         delta += float(now - lastTime) / float(nsPerTick)
         lastTime = now
         shouldRender = False
