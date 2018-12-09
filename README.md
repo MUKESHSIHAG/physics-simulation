@@ -5,7 +5,7 @@
       This is a simple physics engine module made using pygame in python.
  
 It is based on some physics phenomenon and mathematical expressions which defines movement after collision between particles,
-gravitational force on partciles and spring function to make a chain of particles to work them as spring. for example: three 
+gravitational force on particles and spring function to make a chain of particles to work them as spring. for example: three 
 particles together will act as triangle.
 
 *To use this module in your file download it in the folder where you are working and import **PyParticle.py** in your file.*
