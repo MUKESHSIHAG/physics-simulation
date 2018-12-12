@@ -2,7 +2,7 @@ import pygame
 import random
 import math
 
-background_colour = (255,255,255)
+background_colour = (0,255,0 )
 (width, height) = (400, 400)
 
 class Particle():
@@ -40,7 +40,7 @@ class Particle():
             self.angle = math.pi - self.angle
 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Tutorial 5')
+pygame.display.set_caption('boundary')
 
 number_of_particles = 10
 my_particles = []
@@ -61,7 +61,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+    
     screen.fill(background_colour)
 
     for particle in my_particles:
@@ -69,4 +69,4 @@ while running:
         particle.bounce()
         particle.display()
 
-pygame.display.flip()
+	pygame.display.flip()
