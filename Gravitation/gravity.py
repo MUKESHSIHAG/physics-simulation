@@ -42,4 +42,4 @@ while running:
     for p in particles_to_remove:
         universe.particles.remove(p)
 
-    pygame.display.flip()
+pygame.display.flip()
