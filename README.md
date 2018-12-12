@@ -4,24 +4,24 @@
 
       This is a simple physics engine module made using pygame in python.
  
-It is based on some physics phenomenon and mathematical expressions which defines movement after collision between particles,
-gravitational force on particles and spring function to make a chain of particles to work them as spring. for example: three 
-particles together will act as triangle.
+It is based on some physics phenomenon and mathematical expressions which defines movement after the collision between particles,
+the gravitational force on particles and spring function to make a chain of particles to work them as spring. for example three 
+particles together will act as a triangle.
 
 *To use this module in your file download it in the folder where you are working and import **PyParticle.py** in your file.*
 
-**other files are example of using PyParticle, one just need to place pyparticle.py in current folder/directory.
+**other files are examples of using PyParticle, one just needs to place pyparticle.py in current folder/directory.
 No need to download other files**
 
 Below all examples are created using PyParticle module which enables to write less number of lines code.
 
 > **Some of the main features of this it defines the movement of particles
-in space and provides ability to zoom-in and zoom-out**
+in space and provides the ability to zoom-in and zoom-out**
 
 ![space particle](/images/simu.png)
 
 
->> ***This programm shows the effect on speed of particles after collision depending on their mass***
+>> ***This programme shows the effect on the speed of particles after collision depending on their mass***
 
 ![space particle](/images/collision.png)  
 
@@ -31,7 +31,7 @@ in space and provides ability to zoom-in and zoom-out**
 ![space particle](/images/spring.png)  
 
 > To use this module in your file download it in the folder where you are working and import PyParticle in your file**
-You can call its function by passing arguments using name of function 
+You can call its function by passing arguments using the name of the function 
 
              **Referred to example programs to see how to call the function in PyParticle module**
 Licensed under [MIT License](LICENSE).             
