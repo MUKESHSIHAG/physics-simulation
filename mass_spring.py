@@ -1,32 +1,25 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 26 23:22:19 2017
-@author: kaswan
-"""
-
 import pygame, sys, math
 
 pygame.init()
 
-FPS = 60 # frames per second setting
+FPS = 10 # frames per second setting
 fpsClock = pygame.time.Clock()
 
 # set up the window
-screen = pygame.display.set_mode((400, 300), 0, 32)
+screen = pygame.display.set_mode((700, 600), 0, 32)
 pygame.display.set_caption('Mass Spring System')
 
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+BLACK = (10, 105, 255)
+WHITE = (255, 0, 0)
 
-delta_t = 0.1
+delta_t = 0.01
 m = 1
-k = 0.5 #Spring Constant
+k = 1 #Spring Constant
 
 x = 0
 y = 250
 
-vx = 10
+vx = 30
 vy = 0
 
 while True:
