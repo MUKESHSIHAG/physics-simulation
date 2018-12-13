@@ -1,6 +1,4 @@
-import pygame
-import math
-
+import pygame,math
 from PyParticles import utils
 
 class Particle(object):
