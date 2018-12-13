@@ -8,7 +8,9 @@ drag = 0.999
 elasticity = 0.7
 gravity = (math.pi, 0.002)
 
-def addVectors((angle1, length1), (angle2, length2)):
+def addVectors(vector1, vector2):
+    (angle1, length1) = vector1
+    (angle2, length2) = vector2
     x  = math.sin(angle1) * length1 + math.sin(angle2) * length2
     y  = math.cos(angle1) * length1 + math.cos(angle2) * length2
     
