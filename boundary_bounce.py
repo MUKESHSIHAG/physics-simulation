@@ -4,7 +4,7 @@ background_colour = (0,255,0 )
 (width, height) = (400, 400)
 
 class Particle():
-    def __init__(self, (x, y), size):
+    def __init__(self, x_y, size):
         self.x = x
         self.y = y
         self.size = size
