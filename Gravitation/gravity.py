@@ -1,7 +1,4 @@
-import random
-import pygame
-import PyParticles
-
+import random,pygame,PyParticles
 (width, height) = (400, 400)
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Star formation')
