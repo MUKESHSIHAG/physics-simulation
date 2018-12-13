@@ -1,11 +1,10 @@
-import pygame,random,math
+import pygame, random, math
 
 background_colour = (255,255,255)
 (width, height) = (400, 400)
-mass_of_air = 0
-drag = 0.999
+drag = 0.9999
 elasticity = 0.75
-gravity = (math.pi, 0.002)
+gravity = (math.pi, 0.1)
 
 def addVectors((angle1, length1), (angle2, length2)):
     x  = math.sin(angle1) * length1 + math.sin(angle2) * length2
@@ -28,22 +27,23 @@ def collide(p1, p2):
     
     dist = math.hypot(dx, dy)
     if dist < p1.size + p2.size:
-        angle = math.atan2(dy,dx) + 0.5 * math.pi
-        total_mass = p1.mass + p2.mass
+        tangent = math.atan2(dy, dx)
 
-        (p1.angle, p1.speed) = addVectors((p1.angle, p1.speed*(p1.mass-p2.mass)/total_mass), (angle, 2*p2.speed*p2.mass/total_mass))
-        (p2.angle, p2.speed) = addVectors((p2.angle, p2.speed*(p2.mass-p1.mass)/total_mass), (angle+math.pi, 2*p1.speed*p1.mass/total_mass))
+        p1.angle = 2*tangent - p1.angle
+        p2.angle = 2*tangent - p2.angle
+
+        (p1.speed, p2.speed) = (p2.speed, p1.speed)
         p1.speed *= elasticity
         p2.speed *= elasticity
 
-        overlap = 0.5*(p1.size + p2.size - dist+1)
+        angle = 0.5 * math.pi + tangent
         p1.x += math.sin(angle)
         p1.y -= math.cos(angle)
         p2.x -= math.sin(angle)
         p2.y += math.cos(angle)
 
 class Particle():
-    def __init__(self, (x, y), size, mass=1):
+    def __init__(self, (x, y), size):
         self.x = x
         self.y = y
         self.size = size
@@ -51,14 +51,12 @@ class Particle():
         self.thickness = 0
         self.speed = 0
         self.angle = 0
-        self.mass = mass
-        self.drag = (self.mass/(self.mass + mass_of_air))**self.size
 
     def display(self):
         pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size, self.thickness)
 
     def move(self):
-        #(self.angle, self.speed) = addVectors((self.angle, self.speed), gravity)
+        (self.angle, self.speed) = addVectors((self.angle, self.speed), gravity)
         self.x += math.sin(self.angle) * self.speed
         self.y -= math.cos(self.angle) * self.speed
         self.speed *= drag
@@ -85,26 +83,25 @@ class Particle():
             self.speed *= elasticity
 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Collisons')
+pygame.display.set_caption('Tutorial 8')
 
 number_of_particles = 5
 my_particles = []
 
 for n in range(number_of_particles):
     size = random.randint(10, 20)
-    density = random.randint(1,10)
     x = random.randint(size, width-size)
     y = random.randint(size, height-size)
 
-    particle = Particle((x, y), size, density*size**2)
-    particle.colour = (200-density*20, 200-density*20, 255)
-    particle.speed = random.random()
+    particle = Particle((x, y), size)
+    particle.speed = random.random()*10
     particle.angle = random.uniform(0, math.pi*2)
 
     my_particles.append(particle)
 
 selected_particle = None
 running = True
+clock = pygame.time.Clock()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -112,9 +109,6 @@ while running:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             (mouseX, mouseY) = pygame.mouse.get_pos()
             selected_particle = findParticle(my_particles, mouseX, mouseY)
-            #change color of selected particle
-            #if selected_particle:
-                #selected_particle.colour = (255,101,190)
         elif event.type == pygame.MOUSEBUTTONUP:
             selected_particle = None
 
@@ -135,3 +129,4 @@ while running:
         particle.display()
 
     pygame.display.flip()
+clock.tick(50)
