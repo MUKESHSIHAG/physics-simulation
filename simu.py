@@ -1,6 +1,4 @@
-import random
-import pygame
-import PyParticles
+import random,pygame,PyParticles
 
 class UniverseScreen:
     def __init__ (self, width, height):
