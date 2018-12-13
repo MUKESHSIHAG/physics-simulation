@@ -1,8 +1,4 @@
-#! /usr/bin/env python
-
-import os
-import random
-import pygame
+import os,random,pygame
 
 # Class for the orange dude
 class Player(object):
