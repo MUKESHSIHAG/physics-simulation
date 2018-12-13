@@ -1,5 +1,4 @@
-import wireframe
-import pygame
+import wireframe,pygame
 
 key_to_function = {
     pygame.K_LEFT:   (lambda x: x.translateAll('x', -10)),
