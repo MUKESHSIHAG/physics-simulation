@@ -1,8 +1,9 @@
 import math, random
 
-def addVectors((angle1, length1), (angle2, length2)):
+def addVectors(vector1, vector2):
     """ Returns the sum of two vectors """
-    
+    (angle1, length1) = vector1
+    (angle2, length2) = vector2
     x  = math.sin(angle1) * length1 + math.sin(angle2) * length2
     y  = math.cos(angle1) * length1 + math.cos(angle2) * length2
     
@@ -48,7 +49,8 @@ def collide(p1, p2):
 class Particle:
     """ A circular object with a velocity, size and mass """
     
-    def __init__(self, (x, y), size, mass=1):
+    def __init__(self, x_y, size, mass=1):
+        (x, y) = x_y
         self.x = x
         self.y = y
         self.size = size
@@ -69,9 +71,9 @@ class Particle:
     def experienceDrag(self):
         self.speed *= self.drag
 
-    def mouseMove(self, (x, y)):
+    def mouseMove(self, x_y):
         """ Change angle and speed to move towards a given point """
-        
+        (x, y) = x_y
         dx = x - self.x
         dy = y - self.y
         self.angle = 0.5*math.pi + math.atan2(dy, dx)
@@ -99,7 +101,8 @@ class Particle:
 class Environment:
     """ Defines the boundary of a simulation and its properties """
     
-    def __init__(self, (width, height)):
+    def __init__(self, width_height):
+        (width, height) = width_height
         self.width = width
         self.height = height
         self.particles = []

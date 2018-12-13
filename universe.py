@@ -1,9 +1,10 @@
 import math,random,pygame
 from pygame import *
 
-def combineVectors((angle1, length1), (angle2, length2)):
+def combineVectors(vector1, vector2):
     """ Adds together two vectors given as an angle plus a magnitude (length)"""
-
+    (angle1, length1) = vector1
+    (angle2, length2) = vector2
     x  = math.sin(angle1) * length1
     y  = math.cos(angle1) * length1
     x1 = x + math.sin(angle2) * length2
