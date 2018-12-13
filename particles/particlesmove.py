@@ -1,10 +1,4 @@
-#!/usr/bin/python
-import math
-import random
-import sys
-import os
-import pygame
-import time
+import math,random,sys,os,pygame,time
 
 class UnpreparedParticle(Exception):
     pass
