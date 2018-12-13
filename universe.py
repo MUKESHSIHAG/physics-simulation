@@ -1,6 +1,4 @@
-import math
-import random
-import pygame
+import math,random,pygame
 from pygame import *
 
 def combineVectors((angle1, length1), (angle2, length2)):
