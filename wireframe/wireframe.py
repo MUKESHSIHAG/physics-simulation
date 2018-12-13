@@ -40,9 +40,9 @@ class Wireframe:
             for node in self.nodes:
                 setattr(node, axis, getattr(node, axis) + d)
 
-    def scale(self, (centre_x, centre_y), scale):
+    def scale(self, centre, scale):
         """ Scale the wireframe from the centre of the screen """
-
+        (centre_x, centre_y) = centre
         for node in self.nodes:
             node.x = centre_x + scale * (node.x - centre_x)
             node.y = centre_y + scale * (node.y - centre_y)

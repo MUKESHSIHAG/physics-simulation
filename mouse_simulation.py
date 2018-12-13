@@ -8,7 +8,9 @@ drag = 0.999
 elasticity = 0.75
 gravity = (math.pi, 0.002)
 
-def addVectors((angle1, length1), (angle2, length2)):
+def addVectors(vector1, vector2):
+    (angle1, length1) = vector1
+    (angle2, length2) = vector2
     x  = math.sin(angle1) * length1 + math.sin(angle2) * length2
     y  = math.cos(angle1) * length1 + math.cos(angle2) * length2
     
@@ -24,7 +26,8 @@ def findParticle(particles, x, y):
     return None
 
 class Particle():
-    def __init__(self, (x, y), size):
+    def __init__(self, x_y, size):
+        (x, y) = x_y
         self.x = x
         self.y = y
         self.size = size
