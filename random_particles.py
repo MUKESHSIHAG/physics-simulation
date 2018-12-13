@@ -1,7 +1,7 @@
 import pygame,random
 
 background_colour = (255,255,255)
-(width, height) = (300, 200)
+(width, height) = (700, 600)
 
 class Particle():
     def __init__(self, (x, y), size):
@@ -33,6 +33,6 @@ pygame.display.flip()
 
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-running = False
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			running = False	

@@ -2,8 +2,8 @@ import pygame
 import random
 import math
 
-background_colour = (255,255,255)
-(width, height) = (400, 400)
+background_colour = (109,25,55)
+(width, height) = (700, 600)
 drag = 0.999
 elasticity = 0.75
 gravity = (math.pi, 0.002)
@@ -64,9 +64,9 @@ class Particle():
             self.speed *= elasticity
 
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Tutorial 7')
+pygame.display.set_caption('mouse_simulation')
 
-number_of_particles = 3
+number_of_particles = 10
 my_particles = []
 
 for n in range(number_of_particles):
@@ -106,4 +106,4 @@ while running:
         particle.bounce()
         particle.display()
 
-pygame.display.flip()
+	pygame.display.flip()
