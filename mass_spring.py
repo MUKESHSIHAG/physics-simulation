@@ -34,7 +34,7 @@ while True:
     x = x + vx * delta_t
     y = y + vy * delta_t
 
-    if x > 400:
+    if x > 700:
         screen.fill(BLACK)
         x = 0
         
