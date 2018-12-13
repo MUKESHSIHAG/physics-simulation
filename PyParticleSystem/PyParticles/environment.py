@@ -1,6 +1,4 @@
-import random
-import math
-
+import random,math
 from PyParticles import pyparticles
 from PyParticles import utils
 
