@@ -1,5 +1,5 @@
 import math,random,pygame
-from pygame import *
+from pygame.locals import *
 
 def combineVectors(vector1, vector2):
     """ Adds together two vectors given as an angle plus a magnitude (length)"""
@@ -118,4 +118,4 @@ while running:
 for p in particles:
     dx = math.sin(p.angle) * p.speed
     dy = math.cos(p.angle) * p.speed
-    print "(%d, %d)\t(dx=%f, dy=%f)\tmass = %d" % (p.x, p.y, dx, dy, p.mass)
+    print ("(%d, %d)\t(dx=%f, dy=%f)\tmass = %d" % (p.x, p.y, dx, dy, p.mass))

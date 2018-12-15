@@ -149,7 +149,7 @@ class Environment:
             elif n == 2:
                 self.particle_functions2.append(f)
             else:
-                print "No such function: %s" % f
+                print("No such function: %s" % f)
 
     def addParticles(self, n=1, **kargs):
         """ Add n particles with properties given by keyword arguments """
