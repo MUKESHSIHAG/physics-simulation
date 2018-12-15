@@ -8,7 +8,7 @@ Basically how it works is when you move a rect, you first move along the X axis,
  
 # Final Output
 
-![side based rect collision](/physics-simulation/rectcollision)
+![side based rect collision](/rectcollision/rect.png)
 
 The final output will be displayed as the above figure.
 If you got the same output as above. Then you are all set.
