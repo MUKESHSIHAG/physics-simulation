@@ -2,9 +2,9 @@ import pygame, random, math
 
 background_colour = (255,255,255)
 (width, height) = (400, 400)
-drag = 0.9999
-elasticity = 0.75
-gravity = (math.pi, 0.1)
+drag = 0.999
+elasticity = 0.7
+gravity = (math.pi, 0.002)
 
 def addVectors(vector1, vector2):
     (angle1, length1) = vector1
@@ -30,23 +30,27 @@ def collide(p1, p2):
     dist = math.hypot(dx, dy)
     if dist < p1.size + p2.size:
         tangent = math.atan2(dy, dx)
-
-        p1.angle = 2*tangent - p1.angle
-        p2.angle = 2*tangent - p2.angle
-
-        (p1.speed, p2.speed) = (p2.speed, p1.speed)
-        p1.speed *= elasticity
-        p2.speed *= elasticity
-
         angle = 0.5 * math.pi + tangent
+
+        angle1 = 2*tangent - p1.angle
+        angle2 = 2*tangent - p2.angle
+        speed1 = p2.speed*elasticity
+        speed2 = p1.speed*elasticity
+
+        (p1.angle, p1.speed) = (angle1, speed1)
+        (p2.angle, p2.speed) = (angle2, speed2)
+
         p1.x += math.sin(angle)
         p1.y -= math.cos(angle)
         p2.x -= math.sin(angle)
         p2.y += math.cos(angle)
 
 class Particle():
-    def __init__(self, x_y, size):
-        (x, y) = x_y
+    boundary_circle_x = 200
+    boundary_circle_y = 200
+    boundary_circle_r = 200
+    
+    def __init__(self, (x, y), size):
         self.x = x
         self.y = y
         self.size = size
@@ -59,12 +63,25 @@ class Particle():
         pygame.draw.circle(screen, self.colour, (int(self.x), int(self.y)), self.size, self.thickness)
 
     def move(self):
-        (self.angle, self.speed) = addVectors((self.angle, self.speed), gravity)
+        #(self.angle, self.speed) = addVectors((self.angle, self.speed), gravity)
         self.x += math.sin(self.angle) * self.speed
         self.y -= math.cos(self.angle) * self.speed
         self.speed *= drag
 
     def bounce(self):
+        dx = self.boundary_circle_x - self.x
+        dy = self.boundary_circle_y - self.y
+        overlap = math.hypot(dx, dy) - (self.boundary_circle_r - self.size)
+
+        if overlap >= 0:
+            tangent = math.atan2(dy, dx)
+            self.angle = 2 * tangent - self.angle
+            self.speed *= elasticity
+
+            angle = 0.5 * math.pi + tangent
+            self.x += math.sin(angle)*overlap
+            self.y -= math.cos(angle)*overlap
+            
         if self.x > width - self.size:
             self.x = 2*(width - self.size) - self.x
             self.angle = - self.angle
@@ -85,6 +102,7 @@ class Particle():
             self.angle = math.pi - self.angle
             self.speed *= elasticity
 
+
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Tutorial 8')
 
@@ -97,14 +115,14 @@ for n in range(number_of_particles):
     y = random.randint(size, height-size)
 
     particle = Particle((x, y), size)
-    particle.speed = random.random()*10
+    particle.speed = random.random()
     particle.angle = random.uniform(0, math.pi*2)
 
     my_particles.append(particle)
 
+clock = pygame.time.Clock()
 selected_particle = None
 running = True
-clock = pygame.time.Clock()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -123,6 +141,7 @@ while running:
         selected_particle.speed = math.hypot(dx, dy) * 0.1
 
     screen.fill(background_colour)
+    pygame.draw.circle(screen, (0,0,0), (200, 200), 200, 1)
 
     for i, particle in enumerate(my_particles):
         particle.move()
@@ -132,4 +151,4 @@ while running:
         particle.display()
 
     pygame.display.flip()
-clock.tick(50)
+clock.tick(2000)
