@@ -1,6 +1,6 @@
 import random,math
-from PyParticles import pyparticles
-from PyParticles import utils
+from pyparticles import pyparticles
+from pyparticles import utils
 
 
 class Environment(object):
