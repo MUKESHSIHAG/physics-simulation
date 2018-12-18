@@ -17,6 +17,7 @@ The best way to install pygame is with the pip tool (which is what python uses t
 To see if it works, run one of the included examples:
 
  - python3 -m pygame.examples.aliens
+ - python3 -m pygame.examples.universe
 
 If it works, you are ready to go! 
 
