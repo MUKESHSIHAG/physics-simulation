@@ -1,6 +1,4 @@
-import random
-import numpy
-import operator
+import random,numpy,operator
 from environment import Agent, Environment
 from planner import RoutePlanner
 from simulator import Simulator
