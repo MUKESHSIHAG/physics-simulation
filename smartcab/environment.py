@@ -1,5 +1,4 @@
-import time
-import random
+import time,random
 from collections import OrderedDict
 
 from simulator import Simulator
