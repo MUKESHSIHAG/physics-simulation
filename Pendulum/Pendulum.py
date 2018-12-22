@@ -1,6 +1,4 @@
-import pygame
-import math
-import time
+import pygame, math, time
 
 class Pendulum():
     def __init__(self, angle, pivot_x, pivot_y):
