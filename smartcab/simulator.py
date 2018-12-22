@@ -1,7 +1,4 @@
-import os
-import time
-import random
-import importlib
+import os,time,random,importlib
 
 class Simulator(object):
     """Simulates agents in a dynamic smartcab environment.
