@@ -1,6 +1,4 @@
-import pygame
-import math
-import time
+import pygame, math, time
 from Pendulum import Pendulum, dist, onPath, collide        
 
 if __name__ == "__main__":
