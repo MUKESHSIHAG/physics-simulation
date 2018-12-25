@@ -1,6 +1,4 @@
-import pygame
-import random
-import math
+import pygame, random, math
  
 # Define some colors
 BLACK = (0, 0, 0)
