@@ -1,5 +1,6 @@
 import pygame, time, math, sys
 from pygame.locals import*
+
 pygame.init()
 
 class LongWave_Point(object):
