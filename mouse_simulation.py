@@ -1,6 +1,4 @@
-import pygame
-import random
-import math
+import pygame,random,math
 
 background_colour = (109,25,55)
 (width, height) = (700, 600)

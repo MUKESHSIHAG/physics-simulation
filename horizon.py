@@ -1,4 +1,4 @@
-import pygame,sys,math
+import pygame, sys, math
 
 pygame.init()
 
@@ -9,8 +9,8 @@ fpsClock = pygame.time.Clock()
 screen = pygame.display.set_mode((400, 300), 0, 32)
 pygame.display.set_caption('Projectile Motion')
 
-BLACK = (10, 105, 255)
-WHITE = (255, 0, 0)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 delta_t = 0.01
 m = 1
@@ -42,4 +42,6 @@ while True:
             sys.exit()
 
     pygame.display.update()
-fpsClock.tick(FPS)
+    fpsClock.tick(FPS)
+
+

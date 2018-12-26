@@ -1,28 +1,27 @@
-import pygame,sys,math
+import pygame, sys, math
 
 pygame.init()
 
-FPS = 60 # frames per second setting
+FPS = 300 # frames per second setting
 fpsClock = pygame.time.Clock()
 
 # set up the window
 screen = pygame.display.set_mode((400, 300), 0, 32)
 pygame.display.set_caption('Projectile Motion')
 
-BLACK = (10, 105, 255)
-WHITE = (255, 0, 0)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 delta_t = 0.01
 m = 1
-g = 9.8
 
 fx = 0
-fy = m * g
+fy = 0
 
 x = 0
-y = 0
+y = 150
 
-vx = 50
+vx = 10
 vy = 0
 
 while True:
@@ -42,4 +41,6 @@ while True:
             sys.exit()
 
     pygame.display.update()
-fpsClock.tick(FPS)
+    fpsClock.tick(FPS)
+
+pygame.quit()
