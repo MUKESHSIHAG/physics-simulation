@@ -208,10 +208,10 @@ def main():
 
     points = []
 
-    for x in xrange(number):
+    for x in range(number):
         color = [255,255,0]
         if x == number-1:
-            print x
+            print(x)
             points.append( LongWave_Point(  x*spreed+nudge, x, color, True) )
         elif x == 0:
             points.append( LongWave_Point(  x*spreed+nudge, x, color, True  ) )
