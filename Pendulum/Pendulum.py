@@ -16,7 +16,7 @@ class Pendulum():
     def swing(self):
         """Calculate change in x & y in a time dt"""
         g = 9.8
-        dt = 0.01
+        dt = 0.1
         self.angle = 0.5*math.pi - math.atan2(self.y, self.x)
         self.a_x = g*math.sin(self.angle)*math.sin((0.5*math.pi)-self.angle)
         self.v_x += self.a_x*dt

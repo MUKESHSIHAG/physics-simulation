@@ -67,5 +67,4 @@ while running:
         particle.move()
         particle.bounce()
         particle.display()
-
-	pygame.display.flip()
+    pygame.display.flip()
