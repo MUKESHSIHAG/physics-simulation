@@ -132,4 +132,4 @@ while running:
         particle.display()
 
     pygame.display.flip()
-clock.tick(50)
+    clock.tick(50)

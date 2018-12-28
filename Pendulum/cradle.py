@@ -70,7 +70,7 @@ if __name__ == "__main__":
                 p.swing()
             p.draw(screen)
 
-        time.sleep(0.4*0.01)
+        time.sleep(0.4*0.1)
         pygame.display.flip()
 
     pygame.quit()
