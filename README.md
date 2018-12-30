@@ -12,18 +12,21 @@ Pygame requires Python; if you don't already have it, you can download it from p
 
 The best way to install pygame is with the pip tool (which is what python uses to install packages). Note, this comes with python in recent versions. We use the --user flag to tell it to install into the home directory, rather than globally.
 
- - python3 -m pip install -U pygame --user 
+```
+python3 -m pip install -U pygame --user
+``` 
 
 To see if it works, run one of the included examples:
 
- - python3 -m pygame.examples.aliens
- - python3 -m pygame.examples.universe
-
+```
+python3 -m pygame.examples.aliens
+python3 -m pygame.examples.universe
+```
 If it works, you are ready to go! 
 
 *To use this module in your file download it in the folder where you are working and import **PyParticle.py** in your file.*
 
-**other files are examples of using PyParticle, one just needs to place pyparticle.py in current folder/directory.
+**Other files are examples of using PyParticle, one just needs to place pyparticle.py in current folder/directory.
 No need to download other files**
 
 Below all examples are created using PyParticle module which enables to write less number of lines code.
@@ -34,7 +37,7 @@ in space and provides the ability to zoom-in and zoom-out**
 ![space particle](/images/simu.png)
 
 
->> ***This programme shows the effect on the speed of particles after collision depending on their mass***
+> ***This programme shows the effect on the speed of particles after collision depending on their mass***
 
 ![space particle](/images/collision.png)  
 
@@ -46,6 +49,5 @@ in space and provides the ability to zoom-in and zoom-out**
 > To use this module in your file download it in the folder where you are working and import PyParticle in your file**
 You can call its function by passing arguments using the name of the function 
 
-             **Referred to example programs to see how to call the function in PyParticle module**
+**Referred to example programs to see how to call the function in PyParticle module**
 Licensed under [MIT License](LICENSE).             
-
