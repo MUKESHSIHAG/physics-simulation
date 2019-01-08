@@ -73,7 +73,7 @@ class Particle:
 
     def mouseMove(self, x_y):
         """ Change angle and speed to move towards a given point """
-        (x, y) = x_y
+##        (x, y) = x_y
         dx = x - self.x
         dy = y - self.y
         self.angle = 0.5*math.pi + math.atan2(dy, dx)
@@ -94,9 +94,26 @@ class Particle:
             return True
 
         theta = math.atan2(dy, dx)
-        force = 0.2 * self.mass * other.mass / dist**2
-        self.accelerate((theta- 0.5 * math.pi, force/self.mass))
-        other.accelerate((theta+ 0.5 * math.pi, force/other.mass))
+        force = 0.1 * self.mass * other.mass / dist**2
+        self.accelerate((theta - 0.5 * math.pi, force/self.mass))
+        other.accelerate((theta + 0.5 * math.pi, force/other.mass))
+
+class Spring:
+    def __init__(self, p1, p2, length=50, strength=0.5):
+        self.p1 = p1
+        self.p2 = p2
+        self.length = length
+        self.strength = strength
+    
+    def update(self):
+        dx = self.p1.x - self.p2.x
+        dy = self.p1.y - self.p2.y
+        dist = math.hypot(dx, dy)
+        theta = math.atan2(dy, dx)
+        force = (self.length - dist) * self.strength
+        
+        self.p1.accelerate((theta + 0.5 * math.pi, force/self.p1.mass))
+        self.p2.accelerate((theta - 0.5 * math.pi, force/self.p2.mass))
 
 class Environment:
     """ Defines the boundary of a simulation and its properties """
@@ -106,6 +123,7 @@ class Environment:
         self.width = width
         self.height = height
         self.particles = []
+        self.springs = []
         
         self.colour = (255,255,255)
         self.mass_of_air = 0.2
@@ -146,19 +164,27 @@ class Environment:
             particle.speed = kargs.get('speed', random.random())
             particle.angle = kargs.get('angle', random.uniform(0, math.pi*2))
             particle.colour = kargs.get('colour', (0, 0, 255))
+            particle.elasticity = kargs.get('elasticity', self.elasticity)
             particle.drag = (particle.mass/(particle.mass + self.mass_of_air)) ** particle.size
 
             self.particles.append(particle)
 
+    def addSpring(self, p1, p2, length=50, strength=0.5):
+        """ Add a spring between particles p1 and p2 """
+        self.springs.append(Spring(self.particles[p1], self.particles[p2], length, strength))
+
     def update(self):
         """  Moves particles and tests for collisions with the walls and each other """
         
-        for i, particle in enumerate(self.particles):
+        for i, particle in enumerate(self.particles, 1):
             for f in self.particle_functions1:
                 f(particle)
-            for particle2 in self.particles[i+1:]:
+            for particle2 in self.particles[i:]:
                 for f in self.particle_functions2:
                     f(particle, particle2)
+                    
+        for spring in self.springs:
+            spring.update()
 
     def bounce(self, particle):
         """ Tests whether a particle has hit the boundary of the environment """
@@ -183,10 +209,10 @@ class Environment:
             particle.angle = math.pi - particle.angle
             particle.speed *= self.elasticity
 
-    def findParticle(self, x, y):
+    def findParticle(self, x_y):
         """ Returns any particle that occupies position x, y """
-        
+        (x, y) = x_y
         for particle in self.particles:
             if math.hypot(particle.x - x, particle.y - y) <= particle.size:
                 return particle
-return None
+        return None
